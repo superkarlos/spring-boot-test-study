@@ -1,6 +1,5 @@
 # spring-boot-test-study
 
-#  Spring Boot Test Study
 
 Projeto exemplo desenvolvido para estudo e prática de **testes de software** com **Spring Boot**, utilizando **JUnit 5**, **Mockito** e **Spring Boot Test**.  
 O sistema implementa uma API simples de gerenciamento de tarefas (To-Do List) para demonstrar boas práticas em testes unitários e de integração.
