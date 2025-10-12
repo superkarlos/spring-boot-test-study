@@ -1,15 +1,11 @@
 package br.com.project.app.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
 import br.com.project.app.dto.AnimeDto;
+import br.com.project.app.err.BadRequesteexcption;
 import br.com.project.app.model.Anime;
 import br.com.project.app.repository.AnimeRepository;
 
@@ -29,7 +25,7 @@ public class AnimeService {
        Optional<Anime> reque = this.animeRepository.findById(id);
 
        if(reque.isEmpty()){
-        throw new Exception("Anime not foud");
+        throw new BadRequesteexcption("Anime não encontrado!");
        }
 
        return reque.get();
@@ -42,17 +38,17 @@ public class AnimeService {
     }
 
     public String dell(Integer id)throws Exception{
+         getById(id);
         animeRepository.deleteById(id);
         return "Removido";
     }
 
     public String put(AnimeDto data){
         if(data.id() == null){
-            return "Id nulo";
-
+            throw new BadRequesteexcption("id nulo!");
         }
          if(data.nome() == null){
-            return "nome nulo";
+            return "nome nuto";
             
         }
         animeRepository.deleteById(data.id());
