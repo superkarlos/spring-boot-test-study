@@ -44,7 +44,7 @@ public class AnimeController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity< Anime> getAnimeById(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity< Anime> getAnimeById(@PathVariable(value = "id") Integer id) throws Exception {
        return ResponseEntity.status(HttpStatus.OK).body(animeService.getById(id));
     }
 
@@ -54,7 +54,7 @@ public class AnimeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity< String> dellAnimeById(@PathVariable(value = "id") Integer id) {
+    public ResponseEntity< String> dellAnimeById(@PathVariable(value = "id") Integer id) throws Exception {
        return ResponseEntity.status(HttpStatus.OK).body(animeService.dell(id));
     }
 
