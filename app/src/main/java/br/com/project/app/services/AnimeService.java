@@ -3,11 +3,14 @@ package br.com.project.app.services;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import br.com.project.app.dto.AnimeDto;
 import br.com.project.app.err.BadRequesteexcption;
 import br.com.project.app.model.Anime;
 import br.com.project.app.repository.AnimeRepository;
+import jakarta.validation.Valid;
 
 @Service
 public class AnimeService {
@@ -17,9 +20,13 @@ public class AnimeService {
    private AnimeRepository animeRepository ;
 
 
-    public List<Anime> getall() {
-        return animeRepository.findAll();
+    public Page<Anime> getall(Pageable pageable) {
+        return animeRepository.findAll(pageable);
     }
+
+    public List<Anime> getallList() {
+        return animeRepository.findAll();
+    }   
 
     public Anime getById(Integer id)throws Exception {
        Optional<Anime> reque = this.animeRepository.findById(id);
