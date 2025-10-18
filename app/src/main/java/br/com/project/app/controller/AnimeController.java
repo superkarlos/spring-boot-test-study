@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.project.app.dto.AnimeDto;
+import br.com.project.app.err.BadRequesteexcption;
 import br.com.project.app.model.Anime;
 import br.com.project.app.services.AnimeService;
 import br.com.project.app.util.DateUtil;
@@ -14,6 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.query.results.Builders;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -70,13 +73,36 @@ public class AnimeController {
       return ResponseEntity.status(HttpStatus.CREATED).body(animeService.put(entity));
    }
 
-   @GetMapping("/teste")
-   public ResponseEntity<?> getMethodName() {
+   @GetMapping("/teste/{id}")
+   public ResponseEntity<?> getMethodName(@PathVariable Integer id) {
 
-      ResponseEntity<Anime> data = new RestTemplate().getForEntity("http://localhost:8080/path/3", Anime.class);
+    //  ResponseEntity<Anime> data = new RestTemplate().getForEntity("http://localhost:8080/path/", Anime.class);
 
-      Anime anime = new RestTemplate().getForObject("http://localhost:8080/path/3", Anime.class);
-      return ResponseEntity.ok().body(anime);
+     
+      try {
+         Anime anime = new RestTemplate().getForObject("http://localhost:8080/path/"+id, Anime.class);
+         Anime anime2 = animeService.getById(anime.getId());
+         return ResponseEntity.ok().body((anime2));
+      } catch (Exception e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      return ResponseEntity.ok().body(("Anime não cadastrado!"));
+   }
+
+   @PostMapping("/PostRest")
+   public ResponseEntity<String> restPost(@Valid @RequestBody AnimeDto animeDto){
+
+      Anime newAnime= new Anime();
+      BeanUtils.copyProperties(animeDto, newAnime);
+      Object resq = new RestTemplate().postForEntity("http://localhost:8080/path/", newAnime, Anime.class);
+
+      if(resq == null){
+         throw new BadRequesteexcption("Anime não cadastrado!");
+      }
+
+      return ResponseEntity.status(HttpStatus.CREATED).body("Anime cadastrado corretamente");
+
    }
 
 }
