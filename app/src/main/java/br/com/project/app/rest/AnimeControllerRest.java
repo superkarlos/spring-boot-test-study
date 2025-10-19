@@ -17,7 +17,6 @@ import br.com.project.app.dto.AnimeDto;
 import br.com.project.app.err.BadRequesteexcption;
 import br.com.project.app.model.Anime;
 import br.com.project.app.services.AnimeService;
-import br.com.project.app.util.DateUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/rest")
 public class AnimeControllerRest {
 
-    private final DateUtil dateUtil;
     private final AnimeService animeService;
 
     @GetMapping("/{id}")
@@ -51,7 +49,7 @@ public class AnimeControllerRest {
             RestTemplate restTemplate = new RestTemplate();
             
             // faz a requisição GET e obtém uma lista de Animes
-            ResponseEntity<List> response = restTemplate.getForEntity(
+            ResponseEntity<?> response = restTemplate.getForEntity(
                 "http://localhost:8080/path/list", List.class
             );
     

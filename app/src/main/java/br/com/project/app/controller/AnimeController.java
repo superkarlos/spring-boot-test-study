@@ -14,8 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import org.hibernate.query.results.Builders;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @Slf4j
@@ -84,7 +82,7 @@ public class AnimeController {
          Anime anime2 = animeService.getById(anime.getId());
          return ResponseEntity.ok().body((anime2));
       } catch (Exception e) {
-         // TODO Auto-generated catch block
+      
          e.printStackTrace();
       }
       return ResponseEntity.ok().body(("Anime não cadastrado!"));

@@ -10,7 +10,7 @@ import br.com.project.app.dto.AnimeDto;
 import br.com.project.app.err.BadRequesteexcption;
 import br.com.project.app.model.Anime;
 import br.com.project.app.repository.AnimeRepository;
-import jakarta.validation.Valid;
+
 
 @Service
 public class AnimeService {
