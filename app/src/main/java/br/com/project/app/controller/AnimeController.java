@@ -40,13 +40,13 @@ public class AnimeController {
 
    @GetMapping("/")
    public ResponseEntity<Page<Anime>> getAll(Pageable pageable) {
-      log.info(dateUtil.dataTimeLocalFormatStaly(LocalDateTime.now()));
+   //   log.info(dateUtil.dataTimeLocalFormatStaly(LocalDateTime.now()));
       return ResponseEntity.ok(animeService.getall(pageable));
    }
 
    @GetMapping("/list")
    public ResponseEntity<List<Anime>> getAllList() {
-      log.info(dateUtil.dataTimeLocalFormatStaly(LocalDateTime.now()));
+   //   log.info(dateUtil.dataTimeLocalFormatStaly(LocalDateTime.now()));
       return ResponseEntity.ok(animeService.getallList());
    }
 

@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import br.com.project.app.model.Anime;
-import java.util.List;
+
 
 
 @Repository
